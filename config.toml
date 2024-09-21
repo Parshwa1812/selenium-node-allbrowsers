@@ -1,0 +1,26 @@
+[events]
+publish = "tcp://$SE_EVENT_BUS_HOST:$SE_EVENT_BUS_PUBLISH_PORT"
+subscribe = "tcp://$SE_EVENT_BUS_HOST:$SE_EVENT_BUS_SUBSCRIBE_PORT"
+
+[node]
+session-timeout = "300"
+override-max-sessions = false
+detect-drivers = false
+drain-after-session-count = 0
+max-sessions = 3  # Allow up to 3 sessions to handle Chrome, Firefox, and Edge simultaneously
+
+[[node.driver-configuration]]
+display-name = "MicrosoftEdge"
+stereotype = "{\"browserName\": \"MicrosoftEdge\", \"browserVersion\": \"$EDGE_VERSION\", \"platformName\": \"Linux\", \"ms:edgeOptions\": {\"binary\": \"/usr/bin/microsoft-edge\"}, \"se:containerName\": \"\"}"
+max-sessions = 1
+
+[[node.driver-configuration]]
+display-name = "chrome"
+stereotype = "{\"browserName\": \"chrome\", \"browserVersion\": \"$CHROME_VERSION\", \"platformName\": \"Linux\", \"goog:chromeOptions\": {\"binary\": \"/usr/bin/google-chrome\"}, \"se:containerName\": \"\"}"
+max-sessions = 1
+
+[[node.driver-configuration]]
+display-name = "firefox"
+stereotype = "{\"browserName\": \"firefox\", \"browserVersion\": \"$FIREFOX_VERSION\", \"platformName\": \"Linux\", \"moz:firefoxOptions\": {\"binary\": \"/usr/bin/firefox\"}, \"se:containerName\": \"\"}"
+max-sessions = 1
+
